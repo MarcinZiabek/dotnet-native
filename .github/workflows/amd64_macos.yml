@@ -46,3 +46,12 @@ jobs:
       run: CTEST_OUTPUT_ON_FAILURE=1 cmake --build build --config "$BUILD_TYPE" --target "$TEST_TARGET" -v
     - name: Install
       run: cmake --build build --config "$BUILD_TYPE" --target "$INSTALL_TARGET" -v
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      if: ${{ matrix.environment == 'windows-latest' }}
+      with:
+        name: Build Package
+        path: |
+          **/*.nupkg
+          **/*.snupkg
+          !.nuget
