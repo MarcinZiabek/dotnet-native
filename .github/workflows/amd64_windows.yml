@@ -36,3 +36,11 @@ jobs:
       run: cmake --build build --config Release --target RUN_TESTS -v
     - name: Install
       run: cmake --build build --config Release --target INSTALL -v
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Build Package
+        path: |
+          **/*.nupkg
+          **/*.snupkg
+          !.nuget
